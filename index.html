@@ -250,9 +250,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .s10head{text-align:center}
 .s10lbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
 .s10tit{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,5vw,2.8rem);color:var(--cr);margin-top:.3rem}
-.dgrid{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;max-width:860px}
-.dc{width:110px;min-height:120px;padding:.9rem .7rem;background:var(--gl);border:1px solid var(--gd);
-  backdrop-filter:blur(12px);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.4rem;
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:900px;width:100%}
+.dc{min-height:130px;padding:1.1rem .9rem;background:var(--gl);border:1px solid var(--gd);
+  backdrop-filter:blur(12px);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.5rem;
   transition:border-color .3s,box-shadow .3s;animation:dfloat var(--df,4s) ease-in-out infinite alternate;position:relative}
 .dc:hover{border-color:rgba(201,168,76,.5);box-shadow:0 8px 28px rgba(201,168,76,.08)}
 @keyframes dfloat{from{transform:translateY(0)}to{transform:translateY(-8px)}}
@@ -357,7 +357,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .star-word{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;transition:opacity .9s,transform .9s;transform:scale(.4)}
 .star-word.lit{opacity:1;transform:scale(1)}
 .star-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gg),0 0 24px rgba(201,168,76,.3);flex-shrink:0}
-.star-lbl{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.88rem,2vw,1.1rem);color:var(--cr);white-space:nowrap;text-shadow:0 0 20px rgba(201,168,76,.25)}
+.star-lbl{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.88rem,2vw,1.1rem);color:var(--cr);white-space:normal;text-align:center;max-width:200px;text-shadow:0 0 20px rgba(201,168,76,.25)}
 .s13cont{padding:.65rem 1.6rem;background:transparent;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .5s;position:absolute;bottom:4.5rem;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:3}
 .s13cont.on{opacity:1;pointer-events:all}.s13cont:hover{border-color:var(--gold)}
 
@@ -401,7 +401,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 @media(max-width:580px){
   .jrow{gap:.8rem}.jc{width:calc(50vw - 1.5rem);min-height:240px}
   .secrow{gap:1rem}.sec{width:min(300px,90vw)}
-  .dgrid{gap:.5rem}.dc{width:calc(33vw - .9rem);min-height:105px;padding:.7rem .5rem}
+  .dgrid{grid-template-columns:repeat(2,1fr);gap:.5rem}.dc{min-height:105px;padding:.7rem .5rem}
   .dcflag{font-size:1.2rem}.dcname{font-size:.78rem}
   .s9wrap{flex-direction:column;gap:1.2rem}.songlist{max-height:45vh}
 }
@@ -1119,15 +1119,15 @@ const LOVES=[
   'Dorme linda','Acorda mais linda ainda','É cheirosa demais','Cuida de mim','Safada também',
   'O sorriso dela','Quando ela ri de verdade','O jeito que ela abraça',
   'Me faz querer ser melhor','É minha melhor companhia','Sabe me acalmar',
-  'Brava fica mais gostosa','Quando ela some no celular (e eu fico aqui)'
+  'Brava fica mais gostosa','Some no celular (e eu fico aqui)'
 ];
 const STARPOS=[
   {x:12,y:20},{x:65,y:12},{x:36,y:48},{x:74,y:44},
   {x:16,y:65},{x:52,y:70},{x:68,y:28},{x:40,y:30},
   {x:25,y:38},{x:55,y:55},{x:70,y:64},{x:8,y:50},{x:48,y:18},
-  {x:30,y:8},{x:20,y:55},{x:60,y:40},
-  {x:42,y:78},{x:10,y:78},{x:72,y:82},
-  {x:35,y:68},{x:22,y:28}
+  {x:32,y:8},{x:22,y:55},{x:60,y:38},
+  {x:44,y:78},{x:18,y:82},{x:65,y:82},
+  {x:36,y:68},{x:50,y:25}
 ];
 function i13(){
   const field=document.getElementById('s13field');
