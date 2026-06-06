@@ -275,7 +275,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .s10cont.on{opacity:1;pointer-events:all}
 .s10cont:hover{border-color:var(--gold)}
 
-/* ════ S16 CARTA ════ */
+/* ════ S16 PERDÃO ════ */
+#s16{padding:3rem 2rem;background:var(--bg)}
+.pdw{max-width:520px;width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:0;position:relative;z-index:2}
+.pdline{font-family:'DM Sans',sans-serif;font-weight:300;font-size:clamp(.92rem,2.4vw,1.1rem);color:var(--c2);line-height:1.95;opacity:0;transform:translateY(10px);transition:opacity .9s,transform .9s}
+.pdline.vis{opacity:1;transform:translateY(0)}
+.pdword{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2rem,6vw,3.2rem);color:var(--gold);opacity:0;transition:opacity 1.2s;margin-top:1.8rem;text-shadow:0 0 40px rgba(201,168,76,.3)}
+.pdword.vis{opacity:1}
+.pdcont{position:absolute;bottom:4.5rem;left:50%;transform:translateX(-50%);background:none;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;padding:.55rem 1.4rem;opacity:0;pointer-events:none;transition:opacity .5s;white-space:nowrap}
+.pdcont.on{opacity:1;pointer-events:all}
+
+/* ════ S17 CARTA ════ */
 #s16{padding:2rem}
 .s11w{max-width:580px;width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem}
 .s11to{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--gold);display:block}
@@ -289,7 +299,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .s11fin{text-align:center;display:none;width:100%}
 .s11fin.on{display:block}
 
-/* ════ S17 FINALE ════ */
+/* ════ S18 FINALE ════ */
 #s17{background:var(--bg);text-align:center;gap:1rem;padding:2rem}
 .f12pre{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.45em;text-transform:uppercase;color:var(--wine);opacity:0;transition:opacity 1s}
 .f12date{font-family:'Space Mono',monospace;font-size:clamp(.9rem,3vw,1.3rem);letter-spacing:.3em;color:var(--gold);opacity:0;transition:opacity 1s .4s}
@@ -301,7 +311,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .f12rep{margin-top:1.5rem;background:none;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;
   font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:.6rem 1.5rem;
   opacity:0;transition:opacity 1s 2.4s,border-color .3s}
-#s17.go .f12pre,.go .f12date,.go .f12tit,.go .f12name,.go .f12msg,.go .f12rep{opacity:1}
+#s18.go .f12pre,.go .f12date,.go .f12tit,.go .f12name,.go .f12msg,.go .f12rep{opacity:1}
 .f12rep:hover{border-color:var(--gold)}
 
 /* ════ S11 SÉRIE ════ */
@@ -419,7 +429,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   <div class="dot" data-s="11"></div><div class="dot" data-s="12"></div>
   <div class="dot" data-s="13"></div><div class="dot" data-s="14"></div>
   <div class="dot" data-s="15"></div><div class="dot" data-s="16"></div>
-  <div class="dot" data-s="17"></div>
+  <div class="dot" data-s="17"></div><div class="dot" data-s="18"></div>
 </div>
 
 <!-- popup destinos -->
@@ -668,18 +678,31 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   <button class="s15cont" id="s15cont">continuar →</button>
 </div>
 
-<!-- ══ S16 CARTA ══ -->
+<!-- ══ S16 PERDÃO ══ -->
 <div class="sc" id="s16">
-  <div class="s11w" id="s16w">
+  <div class="pdw">
+    <div class="pdline" id="pd1">Essa semana a gente quase se perdeu.</div>
+    <div class="pdline" id="pd2" style="margin-top:1.2rem">Dissemos coisas que doeram. Brigas que assustaram os dois. Momentos em que o medo falou mais alto que o amor — ou pelo menos pareceu.</div>
+    <div class="pdline" id="pd3" style="margin-top:1.2rem">Eu errei. Com palavras que não deveria ter dito. Com o jeito que às vezes deixo o cansaço, o trabalho, as preocupações e as responsabilidades falarem por mim.</div>
+    <div class="pdline" id="pd4" style="margin-top:1.2rem">Mas aqui estou. Do mesmo lado de sempre.</div>
+    <div class="pdline" id="pd5" style="margin-top:1.2rem">A gente não tá junto porque é fácil. Tá junto porque escolheu. E eu te escolho — inclusive quando é difícil. Principalmente quando é difícil.</div>
+    <div class="pdword" id="pd6">Perdão.</div>
+  </div>
+  <button class="pdcont" id="pdcont">continuar →</button>
+</div>
+
+<!-- ══ S17 CARTA ══ -->
+<div class="sc" id="s17">
+  <div class="s11w" id="s17w">
     <span class="s11to">Suelen,</span>
-    <div class="s11pbox" id="s16pbox"></div>
-    <span class="s11click" id="s16hint">toque para continuar</span>
-    <div class="s11fin" id="s16fin"></div>
+    <div class="s11pbox" id="s17pbox"></div>
+    <span class="s11click" id="s17hint">toque para continuar</span>
+    <div class="s11fin" id="s17fin"></div>
   </div>
 </div>
 
-<!-- ══ S17 FINALE ══ -->
-<div class="sc" id="s17">
+<!-- ══ S18 FINALE ══ -->
+<div class="sc" id="s18">
   <p class="f12pre">✦ · dia dos namorados · 12.06.2026 · ✦</p>
   <p class="f12date">12 de junho de 2026</p>
   <h2 class="f12tit">Feliz Dia dos Namorados,</h2>
@@ -777,7 +800,7 @@ function goTo(n){
   NAV.classList.toggle('on',n>0);
   initS(n);
 }
-function next(){goTo(Math.min(CUR+1,17));}
+function next(){goTo(Math.min(CUR+1,18));}
 function prev(){goTo(Math.max(CUR-1,0));}
 
 document.addEventListener('keydown',e=>{
@@ -790,7 +813,7 @@ document.addEventListener('touchstart',e=>tx0=e.touches[0].clientX,{passive:true
 document.addEventListener('touchend',e=>{if(tx0===null)return;const dx=e.changedTouches[0].clientX-tx0;if(Math.abs(dx)>60){dx<0?next():prev();}tx0=null;},{passive:true});
 
 /* ══════ SCENE INITS ══════ */
-function initS(n){({0:i0,1:i1,2:i2,3:i3,4:i4,5:i5,6:i6,7:i7,8:i8,9:i9,10:i10,11:i11,12:i12,13:i13,14:i14,15:i15,16:i16,17:i17})[n]?.();}
+function initS(n){({0:i0,1:i1,2:i2,3:i3,4:i4,5:i5,6:i6,7:i7,8:i8,9:i9,10:i10,11:i11,12:i12,13:i13,14:i14,15:i15,16:i16,17:i17,18:i18})[n]?.();}
 
 /* S0 */
 function i0(){}
@@ -1093,12 +1116,18 @@ function i12(){
 const LOVES=[
   'Sensata','Amorosa','Carinhosa','Gostosa',
   'O jeito que ela me deseja','A intensidade dela','Me enlouquece','Não tem igual',
-  'Dorme linda','Acorda mais linda ainda','É cheirosa demais','Cuida de mim','Safada também'
+  'Dorme linda','Acorda mais linda ainda','É cheirosa demais','Cuida de mim','Safada também',
+  'O sorriso dela','Quando ela ri de verdade','O jeito que ela abraça',
+  'Me faz querer ser melhor','É minha melhor companhia','Sabe me acalmar',
+  'Brava fica mais gostosa','Quando ela some no celular (e eu fico aqui)'
 ];
 const STARPOS=[
   {x:12,y:20},{x:65,y:12},{x:36,y:48},{x:74,y:44},
-  {x:16,y:65},{x:52,y:70},{x:82,y:28},{x:40,y:30},
-  {x:25,y:38},{x:58,y:55},{x:78,y:64},{x:8,y:50},{x:48,y:18}
+  {x:16,y:65},{x:52,y:70},{x:68,y:28},{x:40,y:30},
+  {x:25,y:38},{x:55,y:55},{x:70,y:64},{x:8,y:50},{x:48,y:18},
+  {x:30,y:8},{x:20,y:55},{x:60,y:40},
+  {x:42,y:78},{x:10,y:78},{x:72,y:82},
+  {x:35,y:68},{x:22,y:28}
 ];
 function i13(){
   const field=document.getElementById('s13field');
@@ -1173,11 +1202,25 @@ const PARS=[
   'Las Vegas foi surreal. Mas o que mais importou não foi o Caesars, nem a Omnia, nem as luzes da Strip. Foi você dizendo sim. O ano começou diferente pra sempre.',
   'Disney, Paris, Japão, Aurora Boreal — tudo isso vem. Mas hoje, o que mais importa é que você existe. E eu tenho sorte demais de saber disso.',
 ];
+/* S16 PERDÃO */
 function i16(){
-  const box=document.getElementById('s16pbox');
-  const hint=document.getElementById('s16hint');
-  const fin=document.getElementById('s16fin');
-  const w=document.getElementById('s16w');
+  const lines=['pd1','pd2','pd3','pd4','pd5'];
+  const word=document.getElementById('pd6');
+  const cont=document.getElementById('pdcont');
+  lines.forEach(id=>document.getElementById(id).classList.remove('vis'));
+  word.classList.remove('vis');cont.classList.remove('on');
+  lines.forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('vis'),600+i*900));
+  setTimeout(()=>word.classList.add('vis'),600+lines.length*900);
+  setTimeout(()=>cont.classList.add('on'),600+lines.length*900+1200);
+  document.getElementById('pdcont').onclick=()=>next();
+}
+
+/* S17 CARTA */
+function i17(){
+  const box=document.getElementById('s17pbox');
+  const hint=document.getElementById('s17hint');
+  const fin=document.getElementById('s17fin');
+  const w=document.getElementById('s17w');
   box.innerHTML='';hint.className='s11click';fin.className='s11fin';fin.innerHTML='';
   let cur=0,activeP=null;
 
@@ -1206,9 +1249,9 @@ function i16(){
       // show signature then go to finale
       hint.classList.add('hide');
       if(activeP){activeP.classList.remove('in');activeP.classList.add('out');}
-      fin.innerHTML=`<p style="font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--c2);max-width:500px;margin:0 auto;transition:opacity 1s;opacity:0" id="s16sig1">Com todo o meu amor e admiração,</p><p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:.8rem;transition:opacity 1s .3s;opacity:0" id="s16sig2">Renan Horisawa ✦</p>`;
+      fin.innerHTML=`<p style="font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--c2);max-width:500px;margin:0 auto;transition:opacity 1s;opacity:0" id="s17sig1">Com todo o meu amor e admiração,</p><p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:.8rem;transition:opacity 1s .3s;opacity:0" id="s17sig2">Renan Horisawa ✦</p>`;
       fin.className='s11fin on';
-      setTimeout(()=>{document.getElementById('s16sig1').style.opacity='1';document.getElementById('s16sig2').style.opacity='1';},100);
+      setTimeout(()=>{document.getElementById('s17sig1').style.opacity='1';document.getElementById('s17sig2').style.opacity='1';},100);
       setTimeout(()=>next(),2800);
     }
   }
@@ -1217,10 +1260,10 @@ function i16(){
   showPar(0);cur=1;
 }
 
-/* S17 FINALE */
-function i17(){
-  const s17=document.getElementById('s17');s17.classList.remove('go');
-  setTimeout(()=>{s17.classList.add('go');FX.finale();},300);
+/* S18 FINALE */
+function i18(){
+  const s18=document.getElementById('s18');s18.classList.remove('go');
+  setTimeout(()=>{s18.classList.add('go');FX.finale();},300);
   setTimeout(()=>FX.finale(),1800);
   document.getElementById('f12rep').onclick=()=>goTo(0);
 }
