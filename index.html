@@ -174,8 +174,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 /* ════ S6 PIADAS ════ */
 .s6title{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
-.jrow{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;max-width:840px}
-.jc{width:240px;min-height:280px;background:var(--gl);border:1px solid var(--gd);backdrop-filter:blur(12px);cursor:pointer;
+.jrow{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:920px;width:90vw}
+.jc{min-height:260px;background:var(--gl);border:1px solid var(--gd);backdrop-filter:blur(12px);cursor:pointer;
   position:relative;perspective:1000px;transition:border-color .3s}
 .jc:hover{border-color:rgba(201,168,76,.45)}
 .jcf,.jcb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.8rem;backface-visibility:hidden;transition:transform .65s cubic-bezier(.4,.2,.2,1)}
@@ -190,7 +190,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .jtag{margin-top:.8rem;font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.18em;color:var(--wine);text-transform:uppercase}
 .jcont{background:none;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;
   font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:.6rem 1.5rem;opacity:0;pointer-events:none;transition:opacity .5s;
-  position:absolute;bottom:4.5rem;left:50%;transform:translateX(-50%);white-space:nowrap}
+  margin-top:1.8rem;white-space:nowrap}
 .jcont.on{opacity:1;pointer-events:all}
 
 /* ════ S7 SEGREDOS ════ */
@@ -399,7 +399,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 @keyframes blk{0%,100%{opacity:.25}50%{opacity:1}}
 
 @media(max-width:580px){
-  .jrow{gap:.8rem}.jc{width:calc(50vw - 1.5rem);min-height:240px}
+  .jrow{grid-template-columns:repeat(2,1fr);gap:.8rem}.jc{min-height:220px}
   .secrow{gap:1rem}.sec{width:min(300px,90vw)}
   .dgrid{grid-template-columns:repeat(2,1fr);gap:.5rem}.dc{min-height:105px;padding:.7rem .5rem}
   .dcflag{font-size:1.2rem}.dcname{font-size:.78rem}
