@@ -178,9 +178,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .jc{min-height:260px;background:var(--gl);border:1px solid var(--gd);backdrop-filter:blur(12px);cursor:pointer;
   position:relative;perspective:1000px;transition:border-color .3s}
 .jc:hover{border-color:rgba(201,168,76,.45)}
-.jcf,.jcb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.8rem;backface-visibility:hidden;transition:transform .65s cubic-bezier(.4,.2,.2,1)}
+.jcf,.jcb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.8rem;backface-visibility:hidden;transition:transform .65s cubic-bezier(.4,.2,.2,1);overflow:hidden}
 .jcf{transform:rotateY(0)}
-.jcb{transform:rotateY(-180deg);align-items:flex-start;justify-content:flex-start;padding-top:1.5rem}
+.jcb{transform:rotateY(-180deg);align-items:flex-start;justify-content:flex-start;padding-top:1.5rem;overflow-y:auto}
 .jc.flip .jcf{transform:rotateY(180deg)}
 .jc.flip .jcb{transform:rotateY(0)}
 .jico{font-size:2.8rem;margin-bottom:1rem}
@@ -189,9 +189,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .jtxt{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.8rem;line-height:1.82;color:var(--c2)}
 .jtag{margin-top:.8rem;font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.18em;color:var(--wine);text-transform:uppercase}
 .jcont{background:none;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;
-  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:.6rem 1.5rem;opacity:0;pointer-events:none;transition:opacity .5s;
-  margin-top:1.8rem;white-space:nowrap}
-.jcont.on{opacity:1;pointer-events:all}
+  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:.6rem 1.5rem;
+  margin-top:1.8rem;white-space:nowrap;opacity:1;pointer-events:all}
 
 /* ════ S7 SEGREDOS ════ */
 #s7{gap:1.5rem}
@@ -298,6 +297,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .s11click.hide{display:none}
 .s11fin{text-align:center;display:none;width:100%}
 .s11fin.on{display:block}
+.s17cont{background:none;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:.6rem 1.5rem;
+  opacity:0;pointer-events:none;transition:opacity .8s,border-color .3s;align-self:center;margin-top:.5rem}
+.s17cont.on{opacity:1;pointer-events:all}
+.s17cont:hover{border-color:var(--gold)}
 
 /* ════ S18 FINALE ════ */
 #s18{background:var(--bg);text-align:center;gap:1rem;padding:2rem}
@@ -443,6 +447,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 @media(max-width:580px){
   .jrow{grid-template-columns:repeat(2,1fr);gap:.8rem}.jc{min-height:220px}
+  .jtit{font-size:1rem}.jtxt{font-size:.72rem;line-height:1.65}
   .secrow{gap:1rem}.sec{width:min(300px,90vw)}
   .dgrid{grid-template-columns:repeat(2,1fr);gap:.5rem}.dc{min-height:105px;padding:.7rem .5rem}
   .dcflag{font-size:1.2rem}.dcname{font-size:.78rem}
@@ -741,6 +746,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
     <div class="s11pbox" id="s17pbox"></div>
     <span class="s11click" id="s17hint">toque para continuar</span>
     <div class="s11fin" id="s17fin"></div>
+    <button class="s17cont" id="s17cont">continuar →</button>
   </div>
 </div>
 
@@ -1065,12 +1071,10 @@ const JOKES=[
 ];
 function i6(){
   const row=document.getElementById('jrow');row.innerHTML='';
-  document.getElementById('jcont').classList.remove('on');
-  let flipped=0;
   JOKES.forEach(j=>{
     const c=document.createElement('div');c.className='jc';
     c.innerHTML=`<div class="jcf"><span class="jico">${j.ico}</span><span class="jq">clique para revelar</span></div><div class="jcb"><h3 class="jtit">${j.tit}</h3><p class="jtxt">${j.txt}</p></div>`;
-    c.addEventListener('click',()=>{if(!c.classList.contains('flip')){flipped++;c.classList.add('flip');if(flipped>=JOKES.length)setTimeout(()=>document.getElementById('jcont').classList.add('on'),500);}else c.classList.remove('flip');});
+    c.addEventListener('click',()=>{c.classList.toggle('flip');});
     row.appendChild(c);
   });
   document.getElementById('jcont').onclick=()=>next();
@@ -1332,20 +1336,18 @@ function i17(){
   const hint=document.getElementById('s17hint');
   const fin=document.getElementById('s17fin');
   const w=document.getElementById('s17w');
+  const cont=document.getElementById('s17cont');
   box.innerHTML='';hint.className='s11click';fin.className='s11fin';fin.innerHTML='';
-  let cur=0,activeP=null;
+  cont.classList.remove('on');
+  let cur=0,activeP=null,done=false;
 
   function showPar(idx){
-    // fade out current
     if(activeP){
-      activeP.classList.remove('in');
-      activeP.classList.add('out');
-      const old=activeP;
-      setTimeout(()=>old.remove(),950);
+      activeP.classList.remove('in');activeP.classList.add('out');
+      const old=activeP;setTimeout(()=>old.remove(),950);
     }
     const p=document.createElement('p');
-    p.className='s11p';
-    p.textContent=PARS[idx];
+    p.className='s11p';p.textContent=PARS[idx];
     box.appendChild(p);
     setTimeout(()=>p.classList.add('in'),30);
     activeP=p;
@@ -1354,20 +1356,22 @@ function i17(){
   }
 
   function advance(){
+    if(done) return;
     if(cur<PARS.length){
       showPar(cur);cur++;
     } else {
-      // show signature then go to finale
+      done=true;
       hint.classList.add('hide');
       if(activeP){activeP.classList.remove('in');activeP.classList.add('out');}
       fin.innerHTML=`<p style="font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--c2);max-width:500px;margin:0 auto;transition:opacity 1s;opacity:0" id="s17sig1">Com todo o meu amor e admiração,</p><p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:.8rem;transition:opacity 1s .3s;opacity:0" id="s17sig2">Renan Horisawa ✦</p>`;
       fin.className='s11fin on';
       setTimeout(()=>{document.getElementById('s17sig1').style.opacity='1';document.getElementById('s17sig2').style.opacity='1';},100);
-      setTimeout(()=>next(),2800);
+      setTimeout(()=>cont.classList.add('on'),1200);
     }
   }
 
   w.addEventListener('click',advance);
+  cont.onclick=()=>next();
   showPar(0);cur=1;
 }
 
