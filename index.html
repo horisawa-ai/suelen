@@ -350,6 +350,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .gbox-hint{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.72rem;color:var(--c3);text-align:center;font-style:italic}
 .gbox-tap{font-family:'Space Mono',monospace;font-size:.47rem;letter-spacing:.2em;color:var(--c3);text-transform:uppercase;position:absolute;bottom:.8rem;left:50%;transform:translateX(-50%);white-space:nowrap;animation:blk 1.5s ease infinite}
 .gbox.open .gbox-tap{display:none}
+.gboxrow{flex-wrap:wrap;max-width:500px}
+.g19rep{margin-top:2rem;background:none;border:1px solid var(--gd);color:var(--gold);font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:.6rem 1.5rem;
+  opacity:0;transition:opacity .8s,border-color .3s}
+.g19rep.on{opacity:1}
+.g19rep:hover{border-color:var(--gold)}
 
 /* ════ S11 SÉRIE ════ */
 #s11{padding:1.5rem;gap:1rem}
@@ -745,7 +751,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   <h2 class="f12tit">Feliz Dia dos Namorados,</h2>
   <h1 class="f12name">Suelen.</h1>
   <p class="f12msg">Eu te amo mais do que qualquer história consegue contar.</p>
-  <button class="f12rep" id="f12rep">◈ &nbsp; recomeçar do início</button>
   <button class="f12ps" id="f12ps">· · · p.s. ainda tem mais · · ·</button>
 </div>
 
@@ -798,7 +803,22 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
         </div>
       </div>
 
+      <div class="gbox" id="gb4">
+        <div class="gbox-lid"><span class="gbox-bow">🎀</span></div>
+        <div class="gbox-body">
+          <div class="gbox-rv"></div><div class="gbox-rh"></div>
+          <div class="gbox-inner">
+            <span class="gbox-icon">📱</span>
+            <span class="gbox-name">Um app<br>nosso</span>
+            <span class="gbox-sub">só nosso · feito pra gente</span>
+            <span class="gbox-hint">um cantinho digital só dos dois</span>
+          </div>
+          <span class="gbox-tap">clique para abrir</span>
+        </div>
+      </div>
+
     </div>
+    <button class="g19rep" id="g19rep">◈ &nbsp; recomeçar do início</button>
   </div>
 </div>
 
@@ -1049,7 +1069,7 @@ function i6(){
   let flipped=0;
   JOKES.forEach(j=>{
     const c=document.createElement('div');c.className='jc';
-    c.innerHTML=`<div class="jcf"><span class="jico">${j.ico}</span><span class="jq">clique para revelar</span></div><div class="jcb"><h3 class="jtit">${j.tit}</h3><p class="jtxt">${j.txt}</p><span class="jtag">${j.tag}</span></div>`;
+    c.innerHTML=`<div class="jcf"><span class="jico">${j.ico}</span><span class="jq">clique para revelar</span></div><div class="jcb"><h3 class="jtit">${j.tit}</h3><p class="jtxt">${j.txt}</p></div>`;
     c.addEventListener('click',()=>{if(!c.classList.contains('flip')){flipped++;c.classList.add('flip');if(flipped>=JOKES.length)setTimeout(()=>document.getElementById('jcont').classList.add('on'),500);}else c.classList.remove('flip');});
     row.appendChild(c);
   });
@@ -1356,25 +1376,30 @@ function i18(){
   const s18=document.getElementById('s18');s18.classList.remove('go');
   setTimeout(()=>{s18.classList.add('go');FX.finale();},300);
   setTimeout(()=>FX.finale(),1800);
-  document.getElementById('f12rep').onclick=()=>goTo(0);
   document.getElementById('f12ps').onclick=()=>next();
 }
 /* S19 PRESENTES */
 function i19(){
   const s19=document.getElementById('s19');
+  const rep=document.getElementById('g19rep');
   s19.classList.remove('gon');
-  ['gb1','gb2','gb3'].forEach(id=>document.getElementById(id).classList.remove('open'));
+  rep.classList.remove('on');
+  ['gb1','gb2','gb3','gb4'].forEach(id=>document.getElementById(id).classList.remove('open'));
   setTimeout(()=>s19.classList.add('gon'),200);
-  ['gb1','gb2','gb3'].forEach(id=>{
+  let opened=0;
+  ['gb1','gb2','gb3','gb4'].forEach(id=>{
     const box=document.getElementById(id);
     box.onclick=()=>{
       if(!box.classList.contains('open')){
         box.classList.add('open');
         const r=box.getBoundingClientRect();
         FX.fire(r.left+r.width/2, r.top+40, 55);
+        opened++;
+        if(opened>=4) setTimeout(()=>rep.classList.add('on'),600);
       }
     };
   });
+  rep.onclick=()=>goTo(0);
 }
 
 initS(0);
