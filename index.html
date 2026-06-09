@@ -1337,42 +1337,60 @@ function i17(){
   const fin=document.getElementById('s17fin');
   const w=document.getElementById('s17w');
   const cont=document.getElementById('s17cont');
-  box.innerHTML='';hint.className='s11click';fin.className='s11fin';fin.innerHTML='';
+
+  // Reset completo
+  box.innerHTML='';
+  hint.className='s11click';
+  hint.textContent='toque para continuar';
+  fin.className='s11fin';
+  fin.innerHTML='';
   cont.classList.remove('on');
-  let cur=0,activeP=null,done=false;
+
+  let cur=0,busy=false;
 
   function showPar(idx){
-    if(activeP){
-      activeP.classList.remove('in');activeP.classList.add('out');
-      const old=activeP;setTimeout(()=>old.remove(),950);
-    }
+    busy=true;
+    // Remove parágrafo anterior imediatamente
+    box.innerHTML='';
     const p=document.createElement('p');
-    p.className='s11p';p.textContent=PARS[idx];
+    p.className='s11p';
+    p.textContent=PARS[idx];
     box.appendChild(p);
-    setTimeout(()=>p.classList.add('in'),30);
-    activeP=p;
+    // Pequeno delay para a transição CSS funcionar
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      p.classList.add('in');
+      setTimeout(()=>{busy=false;},400);
+    }));
     if(idx===PARS.length-2) hint.textContent='toque para o finale ✦';
     if(idx===PARS.length-1) hint.classList.add('hide');
   }
 
-  function advance(){
-    if(done) return;
-    if(cur<PARS.length){
-      showPar(cur);cur++;
-    } else {
-      done=true;
-      hint.classList.add('hide');
-      if(activeP){activeP.classList.remove('in');activeP.classList.add('out');}
-      fin.innerHTML=`<p style="font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--c2);max-width:500px;margin:0 auto;transition:opacity 1s;opacity:0" id="s17sig1">Com todo o meu amor e admiração,</p><p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:.8rem;transition:opacity 1s .3s;opacity:0" id="s17sig2">Renan Horisawa ✦</p>`;
-      fin.className='s11fin on';
-      setTimeout(()=>{document.getElementById('s17sig1').style.opacity='1';document.getElementById('s17sig2').style.opacity='1';},100);
-      setTimeout(()=>cont.classList.add('on'),1200);
-    }
+  function showFim(){
+    busy=true;
+    box.innerHTML='';
+    hint.classList.add('hide');
+    fin.innerHTML=`<p style="font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--c2);max-width:500px;margin:0 auto;transition:opacity 1s;opacity:0" id="s17sig1">Com todo o meu amor e admiração,</p><p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:.8rem;transition:opacity 1s .3s;opacity:0" id="s17sig2">Renan Horisawa ✦</p>`;
+    fin.className='s11fin on';
+    setTimeout(()=>{
+      document.getElementById('s17sig1').style.opacity='1';
+      document.getElementById('s17sig2').style.opacity='1';
+    },100);
+    setTimeout(()=>{cont.classList.add('on');busy=false;},1200);
+    // desabilita o click na área depois do fim
+    w.onclick=null;
   }
 
-  w.addEventListener('click',advance);
+  w.onclick=(e)=>{
+    if(e.target===cont||cont.contains(e.target)) return;
+    if(busy) return;
+    if(cur<PARS.length){ showPar(cur); cur++; }
+    else { showFim(); }
+  };
+
   cont.onclick=()=>next();
-  showPar(0);cur=1;
+
+  // Mostra primeiro parágrafo imediatamente
+  showPar(0); cur=1;
 }
 
 /* S18 FINALE */
